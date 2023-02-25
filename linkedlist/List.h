@@ -11,13 +11,15 @@ class List {
 public:
     // default constructor
     List() : firstPtr(nullptr), lastPtr(nullptr) {
+      std::cout << "Creating list ...";
         // empty body
     } // end List constructor
 
    // destructor
    ~List() {
+               std::cout << "Destroying nodes ...\n";
+
       if (!isEmpty()) { // List is not empty
-         std::cout << "Destroying nodes ...\n";
 
          ListNode<NODETYPE>* currentPtr{firstPtr};
          ListNode<NODETYPE>* tempPtr{nullptr};
@@ -134,6 +136,14 @@ public:
 
       std::cout << "\n\n";
    } 
+
+   void concatenate(List<NODETYPE>& l){
+      lastPtr->nextPtr = l.firstPtr; //next element of the list is going to be the fisrt element of the input list
+      lastPtr = l.lastPtr; //last element of my output list is going to be the last element of my input list
+
+      l.firstPtr = nullptr; //cutting the first element connection of our input list
+      l.lastPtr=nullptr; //cutting the last element connection of our input list
+   }
 
 private:
    ListNode<NODETYPE>* firstPtr{nullptr}; // pointer to first node
